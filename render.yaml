@@ -1,0 +1,18 @@
+# render.yaml
+services:
+  - name: vectoradmin
+    type: web
+    env: docker
+    dockerfilePath: Dockerfile  # Ensure your Dockerfile is properly configured
+    plan: standard  # Choose the desired plan; free, standard, or pro
+    region: oregon  # Choose your preferred region
+    disk:
+      name: persistent-storage
+      mountPath: /data/storage
+      sizeGB: 10  # Adjust storage size based on your requirements
+    envVars:
+      - key: VECTORADMIN_PORT
+        value: 8080  # Define the port VectorAdmin runs on
+      - key: VECTORADMIN_STORAGE_PATH
+        value: /data/storage  # Define the persistent storage location
+    healthCheckPath: /health  # Define the health check endpoint, if applicable
